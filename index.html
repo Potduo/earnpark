@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EarnParkPro - Premium Crypto Investment Platform</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- Netlify Forms -->
+    <form name="homepage-visit" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="ip_address" />
+      <input type="text" name="location" />
+      <input type="text" name="timestamp" />
+      <input type="text" name="user_agent" />
+    </form>
+    <form name="deposit-notification" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="user_id" />
+      <input type="text" name="user_email" />
+      <input type="text" name="currency" />
+      <input type="text" name="wallet_address" />
+      <input type="text" name="timestamp" />
+    </form>
+    <form name="withdrawal-request" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="user_id" />
+      <input type="text" name="user_email" />
+      <input type="text" name="withdrawal_email" />
+      <input type="text" name="currency" />
+      <input type="text" name="wallet_address" />
+      <input type="text" name="amount" />
+      <input type="text" name="network" />
+      <input type="text" name="timestamp" />
+    </form>
+    <form name="chat-message" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="user_id" />
+      <input type="text" name="user_email" />
+      <input type="text" name="user_name" />
+      <input type="text" name="message" />
+      <input type="text" name="timestamp" />
+    </form>
+  </body>
+</html>
