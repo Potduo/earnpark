@@ -166,7 +166,7 @@ const Features: React.FC = () => {
                   Start Free Trial
                 </button>
                 <button className="border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-                  Schedule Demo
+                  Learn More
                 </button>
               </div>
             </div>

@@ -29,12 +29,29 @@ const Contact: React.FC = () => {
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setLoading(false);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 5000);
+
+    try {
+      const formData = new FormData();
+      formData.append('form-name', 'contact-message');
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('subject', data.subject);
+      formData.append('message', data.message);
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString()
+      });
+
+      setLoading(false);
+      setSubmitted(true);
+      reset();
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setLoading(false);
+    }
   };
 
   return (

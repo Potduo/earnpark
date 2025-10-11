@@ -228,20 +228,15 @@ const DepositFlow: React.FC<DepositFlowProps> = ({ isOpen, onClose }) => {
                     </p>
                     <ul className="list-disc list-inside space-y-2 text-gray-400">
                       <li>All cryptocurrency transactions are irreversible</li>
-                      <li>You are responsible for sending funds to the correct wallet address</li>
+                      <li>You are responsible for sending funds to the correct wallet address and network</li>
                       <li>Minimum deposit amount is $100 USD equivalent</li>
                       <li>Deposits may take 1-6 network confirmations to process</li>
-                      <li>EarnParkPro is not responsible for funds sent to incorrect addresses</li>
+                      <li>EarnParkPro is not responsible for funds sent to incorrect addresses or wrong networks</li>
                       <li>All investments carry risk and past performance does not guarantee future results</li>
                       <li>You confirm that you are legally allowed to invest in your jurisdiction</li>
-                      <li>Deposit processing may take 1-24 hours to reflect in your dashboard</li>
-                      <li>AI trading bots will begin operating once your deposit is processed and account is activated</li>
+                      <li>Deposit processing may take 10-30 minutes to reflect in your dashboard after blockchain confirmation</li>
+                      <li>AI trading bots will begin operating once your deposit is confirmed</li>
                     </ul>
-                    <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 mt-4">
-                      <p className="text-yellow-400 font-medium text-sm">
-                        Important: This is a demo system. Account activation requires manual configuration through the admin console.
-                      </p>
-                    </div>
                   </div>
                 </div>
 
@@ -298,9 +293,9 @@ const DepositFlow: React.FC<DepositFlowProps> = ({ isOpen, onClose }) => {
                     </div>
                     <div>
                       <h3 className="text-white font-semibold text-lg">
-                        Send {selectedCurrency} to this address
+                        Fund Your Wallet with {selectedCurrency}
                       </h3>
-                      <p className="text-gray-400 text-sm">{selectedCurrencyData.network}</p>
+                      <p className="text-gray-400 text-sm">Deposit to your personal wallet</p>
                     </div>
                   </div>
                 </div>
@@ -318,10 +313,19 @@ const DepositFlow: React.FC<DepositFlowProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
+                {/* Network Info */}
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <h4 className="text-blue-400 font-semibold">Network Type</h4>
+                  </div>
+                  <p className="text-blue-300 text-lg font-semibold">{selectedCurrencyData.network}</p>
+                  <p className="text-blue-200 text-sm mt-1">Ensure you're sending from the correct network</p>
+                </div>
+
                 {/* Wallet Address */}
                 <div className="bg-gray-700/30 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-400 text-sm">Wallet Address</span>
+                    <span className="text-gray-400 text-sm">Your Wallet Address</span>
                     <button
                       onClick={() => copyToClipboard(selectedCurrencyData.address)}
                       className="flex items-center space-x-1 text-green-400 hover:text-green-300 text-sm transition-colors"
@@ -344,24 +348,23 @@ const DepositFlow: React.FC<DepositFlowProps> = ({ isOpen, onClose }) => {
                       <ul className="text-yellow-300 text-sm space-y-1">
                         <li>• Double-check the wallet address before sending</li>
                         <li>• Only send {selectedCurrency} to this address</li>
-                        <li>• Send from the {selectedCurrencyData.network} only</li>
+                        <li>• Network: {selectedCurrencyData.network}</li>
                         <li>• Minimum deposit: $100 USD equivalent</li>
                         <li>• Allow 1-6 network confirmations for processing</li>
-                        <li>• Keep your transaction hash for records</li>
-                        <li>• Do not send from exchange accounts directly</li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                  <h4 className="text-blue-400 font-semibold mb-2">Payment Instructions</h4>
+                  <h4 className="text-blue-400 font-semibold mb-2">Deposit Instructions</h4>
                   <ol className="text-blue-300 text-sm space-y-1">
-                    <li>1. Copy the wallet address above or scan the QR code</li>
+                    <li>1. Copy your wallet address above or scan the QR code</li>
                     <li>2. Open your {selectedCurrency} wallet or exchange</li>
-                    <li>3. Send your desired amount to the address</li>
-                    <li>4. Wait for the transaction to be confirmed on the blockchain</li>
-                    <li>5. Click "I Have Made Payment" below to notify our team</li>
+                    <li>3. Send your desired amount to your wallet address</li>
+                    <li>4. Ensure you select the {selectedCurrencyData.network}</li>
+                    <li>5. Wait for blockchain confirmation (typically 1-6 confirmations)</li>
+                    <li>6. Click "I Have Made Payment" below once transaction is sent</li>
                   </ol>
                 </div>
 
@@ -404,30 +407,30 @@ const DepositFlow: React.FC<DepositFlowProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 <div>
-                  <h3 className="text-white font-semibold text-lg mb-2">Payment Notification Sent!</h3>
+                  <h3 className="text-white font-semibold text-lg mb-2">Deposit Notification Sent!</h3>
                   <p className="text-gray-400">
-                    Thank you for submitting your payment notification. This is a demo system - use the admin console to activate your account.
+                    Thank you for notifying us of your deposit. Your funds will be reflected in your dashboard once the transaction is confirmed on the blockchain.
                   </p>
                 </div>
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6">
-                  <h4 className="text-blue-400 font-semibold mb-3">Demo System Instructions</h4>
+                  <h4 className="text-blue-400 font-semibold mb-3">What's Next?</h4>
                   <ul className="text-gray-300 text-sm space-y-3 text-left">
                     <li className="flex items-start space-x-3">
                       <span className="text-blue-400 mt-1 font-bold">1.</span>
-                      <span>Open browser console (F12) to access admin functions</span>
+                      <span>Your transaction is being processed on the blockchain</span>
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="text-blue-400 mt-1 font-bold">2.</span>
-                      <span>Use ADMIN.activatePortfolio('{user?.id}', 5000) to simulate deposit processing</span>
+                      <span>Funds typically reflect within 10-30 minutes after blockchain confirmation</span>
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="text-blue-400 mt-1 font-bold">3.</span>
-                      <span>Your dashboard will update immediately with sample data</span>
+                      <span>AI trading bots will begin operating once your deposit is confirmed</span>
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="text-blue-400 mt-1 font-bold">4.</span>
-                      <span>All data is stored locally in your browser</span>
+                      <span>You can check your transaction status in the Transactions tab</span>
                     </li>
                   </ul>
                 </div>

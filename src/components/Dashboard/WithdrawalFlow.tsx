@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Bitcoin, DollarSign, Activity, CircleCheck as CheckCircle, TriangleAlert as AlertTriangle, ArrowDownLeft, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../hooks/useAuth';
@@ -20,6 +20,7 @@ const WithdrawalFlow: React.FC<WithdrawalFlowProps> = ({ isOpen, onClose }) => {
   const [network, setNetwork] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [limits, setLimits] = useState({ canWithdraw: true, maxAmount: 0, withdrawalPercentage: 0, monthsActive: 0, reason: '' });
 
   const currencies = [
     { 
@@ -205,10 +206,20 @@ const WithdrawalFlow: React.FC<WithdrawalFlowProps> = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  useEffect(() => {
+    const fetchLimits = async () => {
+      const limitsData = await getWithdrawalLimits();
+      setLimits(limitsData);
+    };
+
+    if (isOpen && step === 'details') {
+      fetchLimits();
+    }
+  }, [step, isOpen]);
+
   if (!isOpen) return null;
 
   const selectedCurrencyData = currencies.find(c => c.id === selectedCurrency);
-  const limits = getWithdrawalLimits();
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">

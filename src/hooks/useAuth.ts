@@ -124,14 +124,14 @@ export const useAuth = () => {
         password,
         options: {
           data: { full_name: fullName },
-          emailRedirectTo: `${window.location.origin}/login?verified=true`,
+          emailRedirectTo: `${window.location.origin}/dashboard`,
         },
       });
 
       if (error) {
         console.error('❌ Sign up error:', error);
       } else {
-        console.log('✅ Sign up successful for:', email);
+        console.log('✅ Sign up initiated for:', email, '- awaiting email confirmation');
       }
 
       return { data, error };

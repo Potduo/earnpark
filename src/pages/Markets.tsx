@@ -3,12 +3,20 @@ import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, Bot, Zap, BarChart3, Activity, DollarSign, Bitcoin } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
-// Mock market data
-const cryptoData = [
-  { name: 'Bitcoin', symbol: 'BTC', price: 45234.67, change: 2.34, volume: '28.5B', icon: Bitcoin },
-  { name: 'Ethereum', symbol: 'ETH', price: 3456.78, change: -1.23, volume: '15.2B', icon: Activity },
-  { name: 'USDT', symbol: 'USDT', price: 1.00, change: 0.01, volume: '45.8B', icon: DollarSign },
-  { name: 'BNB', symbol: 'BNB', price: 312.45, change: 3.67, volume: '2.1B', icon: TrendingUp },
+interface CryptoPrice {
+  name: string;
+  symbol: string;
+  price: number;
+  change: number;
+  volume: string;
+  icon: any;
+}
+
+const initialCryptoData: CryptoPrice[] = [
+  { name: 'Bitcoin', symbol: 'BTC', price: 0, change: 0, volume: '0B', icon: Bitcoin },
+  { name: 'Ethereum', symbol: 'ETH', price: 0, change: 0, volume: '0B', icon: Activity },
+  { name: 'USDT', symbol: 'USDT', price: 1.00, change: 0, volume: '0B', icon: DollarSign },
+  { name: 'BNB', symbol: 'BNB', price: 0, change: 0, volume: '0B', icon: TrendingUp },
 ];
 
 const chartData = [
@@ -30,6 +38,61 @@ const tradingBots = [
 const Markets: React.FC = () => {
   const [selectedCrypto, setSelectedCrypto] = useState('BTC');
   const [liveData, setLiveData] = useState(chartData);
+  const [cryptoData, setCryptoData] = useState<CryptoPrice[]>(initialCryptoData);
+
+  // Fetch real crypto prices
+  useEffect(() => {
+    const fetchCryptoPrices = async () => {
+      try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true');
+        const data = await response.json();
+
+        const updatedData: CryptoPrice[] = [
+          {
+            name: 'Bitcoin',
+            symbol: 'BTC',
+            price: data.bitcoin?.usd || 0,
+            change: data.bitcoin?.usd_24h_change || 0,
+            volume: data.bitcoin?.usd_24h_vol ? `${(data.bitcoin.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
+            icon: Bitcoin
+          },
+          {
+            name: 'Ethereum',
+            symbol: 'ETH',
+            price: data.ethereum?.usd || 0,
+            change: data.ethereum?.usd_24h_change || 0,
+            volume: data.ethereum?.usd_24h_vol ? `${(data.ethereum.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
+            icon: Activity
+          },
+          {
+            name: 'USDT',
+            symbol: 'USDT',
+            price: data.tether?.usd || 1.00,
+            change: data.tether?.usd_24h_change || 0,
+            volume: data.tether?.usd_24h_vol ? `${(data.tether.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
+            icon: DollarSign
+          },
+          {
+            name: 'BNB',
+            symbol: 'BNB',
+            price: data.binancecoin?.usd || 0,
+            change: data.binancecoin?.usd_24h_change || 0,
+            volume: data.binancecoin?.usd_24h_vol ? `${(data.binancecoin.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
+            icon: TrendingUp
+          }
+        ];
+
+        setCryptoData(updatedData);
+      } catch (error) {
+        console.error('Error fetching crypto prices:', error);
+      }
+    };
+
+    fetchCryptoPrices();
+    const priceInterval = setInterval(fetchCryptoPrices, 30000); // Update every 30 seconds
+
+    return () => clearInterval(priceInterval);
+  }, []);
 
   // Simulate live data updates
   useEffect(() => {

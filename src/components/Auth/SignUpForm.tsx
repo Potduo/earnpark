@@ -39,10 +39,13 @@ const SignUpForm: React.FC = () => {
     setError(null);
     setSuccess(false);
 
-    const { error } = await signUp(data.email, data.password, data.fullName);
+    const { data: signUpData, error } = await signUp(data.email, data.password, data.fullName);
 
     if (error) {
       setError(error.message);
+      setLoading(false);
+    } else if (signUpData?.user && !signUpData.user.identities?.length) {
+      setError('An account with this email already exists. Please sign in instead.');
       setLoading(false);
     } else {
       setSuccess(true);
