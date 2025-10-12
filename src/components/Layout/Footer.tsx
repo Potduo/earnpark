@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, Mail, Phone, MapPin, Twitter, Facebook, Linkedin, Instagram } from 'lucide-react';
+import { TrendingUp, Mail, Phone, MapPin, Twitter, Facebook, Star, Instagram } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -26,8 +26,8 @@ const Footer: React.FC = () => {
               <a href="#" className="text-gray-400 hover:text-green-400 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-green-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="https://www.trustpilot.com/review/earnpark.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-400 transition-colors">
+                <Star className="w-5 h-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-green-400 transition-colors">
                 <Instagram className="w-5 h-5" />

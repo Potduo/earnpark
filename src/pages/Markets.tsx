@@ -52,7 +52,7 @@ const Markets: React.FC = () => {
             name: 'Bitcoin',
             symbol: 'BTC',
             price: data.bitcoin?.usd || 0,
-            change: data.bitcoin?.usd_24h_change || 0,
+            change: parseFloat((data.bitcoin?.usd_24h_change || 0).toFixed(3)),
             volume: data.bitcoin?.usd_24h_vol ? `${(data.bitcoin.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
             icon: Bitcoin
           },
@@ -60,7 +60,7 @@ const Markets: React.FC = () => {
             name: 'Ethereum',
             symbol: 'ETH',
             price: data.ethereum?.usd || 0,
-            change: data.ethereum?.usd_24h_change || 0,
+            change: parseFloat((data.ethereum?.usd_24h_change || 0).toFixed(3)),
             volume: data.ethereum?.usd_24h_vol ? `${(data.ethereum.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
             icon: Activity
           },
@@ -68,7 +68,7 @@ const Markets: React.FC = () => {
             name: 'USDT',
             symbol: 'USDT',
             price: data.tether?.usd || 1.00,
-            change: data.tether?.usd_24h_change || 0,
+            change: parseFloat((data.tether?.usd_24h_change || 0).toFixed(3)),
             volume: data.tether?.usd_24h_vol ? `${(data.tether.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
             icon: DollarSign
           },
@@ -76,7 +76,7 @@ const Markets: React.FC = () => {
             name: 'BNB',
             symbol: 'BNB',
             price: data.binancecoin?.usd || 0,
-            change: data.binancecoin?.usd_24h_change || 0,
+            change: parseFloat((data.binancecoin?.usd_24h_change || 0).toFixed(3)),
             volume: data.binancecoin?.usd_24h_vol ? `${(data.binancecoin.usd_24h_vol / 1e9).toFixed(1)}B` : '0B',
             icon: TrendingUp
           }

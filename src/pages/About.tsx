@@ -13,25 +13,19 @@ const team = [
   {
     name: 'Eugene Netso',
     role: 'CEO & Founder',
-    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop&crop=face',
+    image: '/src/assets/eugene-netso.webp',
     bio: 'Former Goldman Sachs VP with 15+ years in quantitative trading and fintech innovation.'
   },
   {
     name: 'Aaron Horwitz',
     role: 'CTO',
-    image: 'https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop&crop=face',
+    image: '/src/assets/aaron-horwtiz.webp',
     bio: 'Ex-Google AI researcher specializing in machine learning algorithms for financial markets.'
-  },
-  {
-    name: 'Sarah Johnson',
-    role: 'Head of Security',
-    image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop&crop=face',
-    bio: 'Cybersecurity expert with experience at major banks and cryptocurrency exchanges.'
   },
   {
     name: 'Nick Nazmov',
     role: 'Head of Trading',
-    image: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop&crop=face',
+    image: '/src/assets/nick-nazmov.webp',
     bio: 'Quantitative analyst with a PhD in Financial Mathematics from MIT.'
   }
 ];
@@ -126,7 +120,7 @@ const About: React.FC = () => {
             className="mb-20"
           >
             <h2 className="text-3xl font-bold text-white text-center mb-12">Meet Our Team</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {team.map((member, index) => (
                 <motion.div
                   key={member.name}
