@@ -7,21 +7,10 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Check if we're using mock client
-  const isMockClient = !import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY;
-
   useEffect(() => {
     const init = async () => {
       try {
         console.log('🚀 Initializing auth...');
-        
-        if (isMockClient) {
-          console.log('🚫 Using mock client - no authentication available');
-          setError('Supabase not configured. Please set up environment variables.');
-          setLoading(false);
-          return;
-        }
-
         console.log('✅ Supabase configured, getting session...');
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
@@ -55,10 +44,6 @@ export const useAuth = () => {
 
     init();
 
-    if (isMockClient) {
-      return () => {}; // No cleanup needed for mock client
-    }
-
     console.log('👂 Setting up auth state listener...');
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('🔄 Auth state changed:', event);
@@ -87,10 +72,6 @@ export const useAuth = () => {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    if (isMockClient) {
-      return { error: { message: 'Please configure Supabase environment variables to enable authentication' } };
-    }
-
     try {
       console.log('🔐 Attempting to sign in user:', email);
       setLoading(true);
@@ -113,10 +94,6 @@ export const useAuth = () => {
   };
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    if (isMockClient) {
-      return { data: null, error: { message: 'Please configure Supabase environment variables to enable authentication' } };
-    }
-
     try {
       console.log('📝 Attempting to sign up user:', email);
       const { data, error } = await supabase.auth.signUp({
@@ -142,10 +119,6 @@ export const useAuth = () => {
   };
 
   const signOut = async () => {
-    if (isMockClient) {
-      return { error: null };
-    }
-
     console.log('👋 Signing out user');
     const { error } = await supabase.auth.signOut();
     if (error) {

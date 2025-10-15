@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Award, Globe, TrendingUp, Shield, Zap, Target, Heart } from 'lucide-react';
 
@@ -13,20 +14,26 @@ const team = [
   {
     name: 'Eugene Netso',
     role: 'CEO & Founder',
-    image: '/src/assets/eugene-netso.webp',
+    image: new URL('../assets/eugene-netso.webp', import.meta.url).href,
     bio: 'Former Goldman Sachs VP with 15+ years in quantitative trading and fintech innovation.'
   },
   {
     name: 'Aaron Horwitz',
     role: 'CTO',
-    image: '/src/assets/aaron-horwtiz.webp',
+    image: new URL('../assets/aaron-horwtiz.webp', import.meta.url).href,
     bio: 'Ex-Google AI researcher specializing in machine learning algorithms for financial markets.'
   },
   {
     name: 'Nick Nazmov',
     role: 'Head of Trading',
-    image: '/src/assets/nick-nazmov.webp',
+    image: new URL('../assets/nick-nazmov.webp', import.meta.url).href,
     bio: 'Quantitative analyst with a PhD in Financial Mathematics from MIT.'
+  },
+  {
+    name: 'David Kim',
+    role: 'Head of Security',
+    image: 'https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop&crop=face',
+    bio: 'Cybersecurity expert with experience at major banks and cryptocurrency exchanges.'
   }
 ];
 
@@ -120,7 +127,7 @@ const About: React.FC = () => {
             className="mb-20"
           >
             <h2 className="text-3xl font-bold text-white text-center mb-12">Meet Our Team</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {team.map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -186,12 +193,18 @@ const About: React.FC = () => {
                 Be part of the financial revolution. Start your journey to financial freedom with EarnParkPro today.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                <Link
+                  to="/signup"
+                  className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-center"
+                >
                   Get Started
-                </button>
-                <button className="border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                </Link>
+                <Link
+                  to="/features"
+                  className="border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-center"
+                >
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>

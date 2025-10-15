@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Bot, TrendingUp, Shield, Globe, Zap, BarChart3, Lock, Users, Clock, Award, Smartphone, HeadphonesIcon } from 'lucide-react';
 
@@ -161,13 +162,13 @@ const Features: React.FC = () => {
               <p className="text-gray-300 mb-6">
                 Join over 180,000 investors who are already using EarnParkPro's advanced features to grow their wealth.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-                  Start Free Trial
-                </button>
-                <button className="border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-                  Learn More
-                </button>
+              <div className="flex justify-center">
+                <Link
+                  to="/signup"
+                  className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300"
+                >
+                  Get Started
+                </Link>
               </div>
             </div>
           </motion.div>
